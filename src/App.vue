@@ -1,6 +1,6 @@
 <template>
   <section>
-    {{form}}
+    <!-- {{form}} -->
     <vue-create-form ref='eForm' v-model='form' :formData="formData">
       <p slot="detail">
         我叫{{form.name}}，性别{{sexOption[form.sex]}}，{{currentEducation}}学历，{{form.isInSchool ? '在读' : '已毕业'}}，今年{{form.age}}岁，每月工资{{form.salary}}元，手机号：{{form.phone}}<br/>{{form.introduce}}
@@ -50,7 +50,7 @@ export default {
           // 动态placeholder
           placeholder: () => this.placeholder,
           maxlength: 10,
-          span: 22,
+          span: 24,
           prompt: {
             title: '标题',
             content: '<a>请输入真实姓名</a>'
@@ -68,14 +68,14 @@ export default {
           type: 'input',
           label: '喜欢的游戏',
           required: () => this.form.sex === 1,
-          span: 22
+          span: 24
         },
         /** @输入框 **/
         idNumber: {
           type: 'input',
           label: '身份证号',
           rule: 'idNumber',
-          span: 22
+          span: 24
         },
         /** @下拉框 **/
         education: {
@@ -85,31 +85,40 @@ export default {
           option: () => this.educationOption,
           labelKey: 'name',
           valueKey: 'grade',
-          span: 22
+          span: 24
         },
         /** @动态表单 **/
         educationList: {
           type: 'dynamicForm',
-          label: '学校信息',
-          span: 22,
+          label: '排课',
+          span: 24,
+          itemSpan: 24,
           labelWidth: 'auto',
-          max: 3,
           required: false,
           formData: {
-            grade: {
-              type: 'select',
-              label: '学龄阶段',
-              option: {1: '幼儿园', 2: '小学', 3: '初中', 4: '高中', 5: '大学'},
-            },
             schoolName: {
               type: 'input',
-              label: '学校名称',
+              label: '任课老师',
             },
-            position: {
-              type: 'input',
-              label: '职位',
-              required: false
-            }
+            educationList: {
+              type: 'dynamicForm',
+              span: 24,
+              itemSpan: 24,
+              labelWidth: 'auto',
+              required: false,
+              formData: {
+                schoolName: {
+                  span: 12,
+                  type: 'date',
+                  label: '上课时间',
+                },
+                address: {
+                  span: 12,
+                  type: 'input',
+                  label: '上课地点',
+                }
+              }
+            },
           }
         },
         /** @switch **/
@@ -135,7 +144,7 @@ export default {
           option: { 1: '教师', 2: '程序员', 3: '运营' },
           // 在读的话不需要选择职业
           show: () => !this.form.isInSchool,
-          span: 22
+          span: 24
         },
         /** @多选框 **/
         hobby: {
@@ -186,7 +195,7 @@ export default {
           type: 'number',
           label: '工资',
           append: '元/月',
-          span: 22
+          span: 24
         },
         divider: {
           type: 'divider',
@@ -212,14 +221,14 @@ export default {
           label: '个人微博',
           rule: 'link',
           required: false,
-          span: 22
+          span: 24
         },
         /** @文本框 **/
         introduce: {
           type: 'textarea',
           label: '自我介绍',
           rows: 4,
-          span: 22,
+          span: 24,
           // 默认都是必填，非必填需要声明required: false
           required: false
         },
@@ -269,7 +278,7 @@ export default {
   section {
     border: 1px solid #e9ebf0;
     width: 820px;
-    padding: 20px 20px 20px 0!important;
+    padding: 20px!important;
     border-radius: 6px;
     margin: 20px;
     p {

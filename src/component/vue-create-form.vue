@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="form" :rules="rules" ref="eForm" :label-width="labelWidth" :label-position='labelPosition' :validate-on-rule-change='false' :disabled='disabled'>
+  <el-form :model="form" :rules="rules" ref="eForm" :label-width="labelWidth" :label-position='labelPosition' :validate-on-rule-change='false' :disabled='disabled' size="small">
     <div class="col" :class="`col-${computedSpan(item)}`" v-for="(item, itemKey) in formData" :key="itemKey">
       <!-- 分割线 -->
       <el-divider v-if="item.type == 'divider'" content-position="left">{{item.label || item.title}}</el-divider>
