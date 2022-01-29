@@ -1,10 +1,10 @@
 <template>
   <el-form :model="form" :rules="rules" ref="eForm" :label-width="labelWidth" :label-position='labelPosition' :validate-on-rule-change='false' :disabled='disabled' size="small">
-    <div class="col" :class="`col-${computedSpan(item)}`" v-for="(item, itemKey) in formData" :key="itemKey">
+    <template v-for="(item, itemKey) in formData">
       <!-- 分割线 -->
-      <el-divider v-if="item.type == 'divider'" content-position="left">{{item.label || item.title}}</el-divider>
+      <el-divider v-if="item.type == 'divider'" content-position="left" :key="itemKey">{{item.label}}</el-divider>
       <!-- 表单 -->
-      <el-form-item :prop="itemKey" v-else-if="!item.show || item.show(form)">
+      <el-form-item :class="`el-col-${computedSpan(item)}`" :prop="itemKey" v-else-if="!item.show || item.show(form)" :key="itemKey">
         <!-- label -->
         <label v-if="item.label" slot="label" :class="{'has-prompt': item.prompt}">
           <span>{{item.label}}</span>
@@ -37,7 +37,7 @@
           </template>
         </component>
       </el-form-item>
-    </div>
+    </template>
   </el-form>
 </template>
 
@@ -366,21 +366,13 @@ export default {
     /deep/ .el-date-editor {
       width: 100%;
     }
-    .col:empty {
-      display: none;
-    }
-    @for $i from 1 to 25 {
-      .col-#{$i}{
-        width: percentage(($i/24));
-      }
-    }
     // 分割线上下距离
     /deep/ .el-divider--horizontal {
-      margin: 18px 6px;
+      margin: 18px 6px 14px;
       width: calc(100% - 12px);
     }
     /deep/ .el-form-item {
-      margin-bottom: 10px;
+      margin-bottom: 6px;
       padding: 0 6px;
     }
     /deep/ .has-prompt {

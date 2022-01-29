@@ -3,15 +3,15 @@
   <section class="dynamicForm">
     <el-button
       class="add"
+      :style="{'--label-length': labelLen}"
       :prevent='false'
-      icon="el-icon-plus"
-      type="primary"
+      type="text"
       plain
       @click="list.push(item.defaultValue || {})"
       :disabled='(item.max == list.length) || item.disabled'
-    >添加</el-button>
+    >(<i class="el-icon-plus"></i><i>添加</i>)</el-button>
     <ul>
-      <li :class="`col-${item.itemSpan}`" v-for="(dynamicItem, dynamicI) in list" :key="dynamicI">
+      <li :class="`el-col-${item.itemSpan || 24}`" v-for="(dynamicItem, dynamicI) in list" :key="dynamicI">
         <slot :dynamicI='dynamicI'/>
         <el-button
           class="del"
@@ -44,6 +44,14 @@ export default {
   computed: {
     list () {
       return this.value[this.itemKey] || []
+    },
+    labelLen () {
+      const label = this.item.label
+      let len = 0
+      for (let i = 0; i < label.length; i++) {
+        len += label.charCodeAt(i) > 128 ? 2 : 1
+      }
+      return len
     }
   }
 }
@@ -52,17 +60,35 @@ export default {
 <style lang='scss' scoped>
   .dynamicForm {
     .add {
-      margin-bottom: 10px;
+      position: absolute;
+      top: -1px;
+      transform: translate(6px, -100%);
+      border: 0;
+      left: calc(var(--label-length) * 7px + 10px);
+      font-size: 14px;
+      font-weight: normal;
+      color: #67C23A;
+      background: transparent;
+      .el-icon-plus {
+        font-weight: bold;
+      }
+      i {
+        position: relative;
+        top: 1px;
+      }
+      &:hover {
+        opacity: .8;
+      }
     }
     ul {
-      margin: 0 -6px -20px;
+      margin: 4px -6px -20px;
       display: flex;
       flex-wrap: wrap;
       &:empty {
         margin-top: 10px;
       }
       @for $i from 1 to 25 {
-        .col-#{$i}{
+        .el-col-#{$i}{
           width: calc(#{percentage(($i/24))} - 12px);
         }
       }
