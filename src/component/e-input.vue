@@ -9,9 +9,9 @@
     :min='item.min'
     :rows='item.rows || 4'
     :autosize="{ minRows: item.rows || 4, maxRows: 20 }"
-    @input="parent.getEvent(item, 'input', value)"
-    @blur="parent.getEvent(item, 'blur', value)"
-    @change="parent.getEvent(item, 'change', value)"
+    @input="item.onInput && item.onInput(value)"
+    @blur="item.onBlur && item.onBlur(value)"
+    @change="item.onChange && item.onChange(value)"
     clearable>
     <!-- 前置内容 -->
     <template slot="prepend" v-if="item.prepend">{{item.prepend}}</template>

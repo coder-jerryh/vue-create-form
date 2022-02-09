@@ -1,6 +1,7 @@
 <template>
   <!-- ---------- 时间选择器 ---------- -->
   <el-time-picker
+    range-separator="至"
     :is-range="item.type === 'timerange'"
     v-model="value[itemKey]"
     :picker-options="parent.getPickerOptions(item)"

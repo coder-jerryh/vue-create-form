@@ -5,13 +5,14 @@
     :placeholder="parent.getPlaceholder(item)"
     :disabled="parent.getBoolean(item.disabled)"
     :multiple='item.multiple'
-    @change="parent.getEvent(item, 'change', $event)"
+    @change="item.onChange && item.onChange($event, value)"
+    collapse-tags
     filterable
     clearable>
     <el-option
       v-for="(opt, i) in parent.getOption(item)"
       :key="i"
-      :value="opt.value"
+      :value="String(opt.value)"
       :label="opt.label"
       :disabled='opt.disabled'/>
   </el-select>

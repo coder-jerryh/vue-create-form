@@ -63,3 +63,25 @@ export const defineValidator = {
     }
   }
 }
+
+// 深拷贝
+export const deepCopy = (obj) => {
+  // JSON.parse(JSON.stringify(obj)) 拷贝会导致【function】和【undefined】拷贝之后丢失
+  // obj为数组要新创建数组，为对象则创建对象
+  const newObj = Array.isArray(obj) ? [] : {}
+  for (const key in obj) {
+    // 判断是不是对象的自有属性，排出原型
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      const value = obj[key]
+      // 引用数据类型，排出null，JS的坑typeof null === 'object'
+      if (typeof value === 'object' && value !== null) {
+        // 递归遍历对象中的引用数据类型
+        newObj[key] = deepCopy(value)
+      } else {
+        // 基础数据类型
+        newObj[key] = value
+      }
+    }
+  }
+  return newObj
+}

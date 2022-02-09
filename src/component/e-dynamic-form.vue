@@ -2,41 +2,46 @@
   <!-- 动态表单 -->
   <section class="dynamicForm">
     <el-button
+      v-if="dynamic"
       class="add"
       :style="{'--label-length': labelLen}"
       :prevent='false'
       type="text"
       plain
-      @click="list.push(item.defaultValue || {})"
+      @click="addItem"
       :disabled='(item.max == list.length) || item.disabled'
     >(<i class="el-icon-plus"></i><i>添加</i>)</el-button>
-    <ul>
+    <ul :class="item.className">
       <li :class="`el-col-${item.itemSpan || 24}`" v-for="(dynamicItem, dynamicI) in list" :key="dynamicI">
         <slot :dynamicI='dynamicI'/>
         <el-button
+          v-if="dynamic"
           class="del"
           plain
           :prevent='false'
           type="danger"
           icon="el-icon-close"
           :disabled='(item.min == list.length) || item.disabled'
-          @click="list.splice(dynamicI, 1)"/>
+          @click="removeItem(dynamicItem, dynamicI)"/>
       </li>
     </ul>
   </section>
 </template>
 
 <script>
-
+import {deepCopy} from '../utils/index.js'
 export default {
   props: {
     item: Object,
     /** @item
       defaultValue: 点击添加生成的默认值
+      dynamic: 动态性
       max: 最大添加数量
       min: 最小添加数量
       disabled: 禁用
       itemSpan: 布局分栏数
+      onAdd: 监听添加
+      onRemove: 监听移除
     **/
     itemKey: String,
     value: Object
@@ -52,6 +57,38 @@ export default {
         len += label.charCodeAt(i) > 128 ? 2 : 1
       }
       return len
+    },
+    dynamic () {
+      const dynamic = this.item.dynamic
+      if (typeof dynamic === 'function') {
+        return dynamic()
+      } else if (dynamic === undefined) {
+        return true
+      } else {
+        return dynamic
+      }
+    }
+  },
+  methods: {
+    // 添加
+    addItem () {
+      // 无onAdd事件或者onAdd事件无返回值时直接移除
+      // 返回false时，拦截移除
+      // onAdd事件需用箭头函数声明
+      const onAdd = this.item.onAdd && this.item.onAdd()
+      if (onAdd !== false) {
+        this.list.push(deepCopy(this.item.defaultValue || {}))
+      }
+    },
+    // 移除
+    removeItem (item, i) {
+      // 无onRemove事件或者onRemove事件无返回值时直接移除
+      // 返回false时，拦截移除
+      // onRemove事件需用箭头函数声明
+      const onRemove = this.item.onRemove && this.item.onRemove(item)
+      if (onRemove !== false) {
+        this.list.splice(i, 1)
+      }
     }
   }
 }
@@ -69,6 +106,9 @@ export default {
       font-weight: normal;
       color: #67C23A;
       background: transparent;
+      &[disabled] {
+        color: #C0C4CC;
+      }
       .el-icon-plus {
         font-weight: bold;
       }
@@ -81,7 +121,7 @@ export default {
       }
     }
     ul {
-      margin: 4px -6px -20px;
+      margin: 4px -6px -10px;
       display: flex;
       flex-wrap: wrap;
       &:empty {

@@ -3,7 +3,7 @@
   <el-radio-group
     v-model="value[itemKey]"
     :disabled="parent.getBoolean(item.disabled)"
-    @change="parent.getEvent(item, 'change', $event)">
+    @change="item.onChange && item.onChange($event, value)">
     <el-radio
       v-for="(opt, i) in parent.getOption(item)"
       :key="i"

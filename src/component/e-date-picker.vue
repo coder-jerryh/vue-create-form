@@ -12,6 +12,7 @@
     :format="item.format || DateFormat[item.type]"
     :value-format="item.format || DateFormat[item.type]"
     :disabled="parent.getBoolean(item.disabled)"
+    :picker-options="item.pickerOptions || {}"
     @change="parent.getEvent(item, 'change', $event)"/>
 </template>
 
