@@ -1,7 +1,7 @@
 {
   "name": "vue-create-form",
   "description": "Vue动态生成Element Form",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "author": "jerry_h@qq.com <jerry_h@qq.com>",
   "license": "MIT",
   "private": false,

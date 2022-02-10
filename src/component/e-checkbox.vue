@@ -4,7 +4,7 @@
     v-if="isRightType"
     v-model="value[itemKey]"
     :disabled="parent.getBoolean(item.disabled)"
-    @change="parent.getEvent(item, 'change', $event)">
+    @change="item.onChange && item.onChange($event, value)">
     <el-checkbox
       v-for="(opt, i) in parent.getOption(item)"
       :key="i"

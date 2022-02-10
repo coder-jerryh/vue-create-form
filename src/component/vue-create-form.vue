@@ -251,12 +251,6 @@ export default {
         return newOption
       }
     },
-    // 获得事件
-    getEvent () {
-      return (item, eventName, params) => {
-        return item.event && item.event[eventName] && item.event[eventName](params)
-      }
-    },
     // 计算布尔值
     getBoolean () {
       return (param) => {
@@ -281,15 +275,6 @@ export default {
         return option
       }
     },
-    // 时间选择器时间限制
-    pickerOptions () {
-      return {
-        disabledDate: time => {
-          // 限制不能选择过去的时间
-          return time.getTime() < new Date(new Date().toLocaleDateString()).getTime()
-        }
-      }
-    },
     computedSpan () {
       return (item) => {
         if (item.type === 'divider') {
@@ -306,16 +291,19 @@ export default {
   methods: {
     // 提交验证
     validate (callback = '') {
+      // 有callback表示第一级
+      callback && (window.validFlags = [])
       const dynamicForm = this.$refs.dynamicForm || []
       const dynamicFormFlag = dynamicForm.every(item => item.validate())
-      let validateFlag = false
+      let validFlag = false
       this.eForm.validate(valid => {
-        validateFlag = valid
-        if (valid && dynamicFormFlag) {
+        validFlag = valid
+        validFlags.push(dynamicFormFlag)
+        if (valid && validFlags.every(item => item)) {
           callback && callback(true)
         }
       })
-      return validateFlag
+      return validFlag
     },
     // 重置表单
     resetFields () {
@@ -340,7 +328,7 @@ export default {
         if (['checkbox', 'dynamicForm'].includes(type) || multiple) {
           defaultValue = []
         } else if (type === 'switch') {
-          defaultValue = inactiveValue
+          defaultValue = inactiveValue || false
         }
         // 分割线不需要设置默认值
         if (type !== 'divider') {

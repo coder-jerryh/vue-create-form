@@ -5,7 +5,7 @@
     :disabled="parent.getBoolean(item.disabled)"
     :active-value="item.activeValue"
     :inactive-value="item.inactiveValue"
-    @change="parent.getEvent(item, 'change', $event)"
+    @change="item.onChange && item.onChange($event, value)"
   />
 </template>
 

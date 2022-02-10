@@ -11,7 +11,7 @@
     :format="item.format || 'HH:mm:ss'"
     :value-format="item.format || 'HH:mm:ss'"
     :disabled="parent.getBoolean(item.disabled)"
-    @change="parent.getEvent(item, 'change', $event)"/>
+    @change="item.onChange && item.onChange($event, value)"/>
 </template>
 
 <script>

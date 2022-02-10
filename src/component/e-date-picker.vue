@@ -1,6 +1,5 @@
 <template>
   <!-- ---------- 日期选择器 ---------- -->
-  <!-- :picker-options="pickerOptions" -->
   <el-date-picker
     :type='item.type'
     v-model="value[itemKey]"
@@ -13,7 +12,7 @@
     :value-format="item.format || DateFormat[item.type]"
     :disabled="parent.getBoolean(item.disabled)"
     :picker-options="item.pickerOptions || {}"
-    @change="parent.getEvent(item, 'change', $event)"/>
+    @change="item.onChange && item.onChange($event, value)"/>
 </template>
 
 <script>

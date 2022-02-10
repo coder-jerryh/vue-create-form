@@ -155,8 +155,8 @@ export default {
           right: -1px;
           top: -1px;
           border-radius: 1px 4px;
-          width: 25px;
-          height: 25px;
+          width: 22px;
+          height: 22px;
           padding: 0;
           font-size: 16px;
         }
