@@ -85,3 +85,6 @@ export const deepCopy = (obj) => {
   }
   return newObj
 }
+
+// 是不是function
+export const isFn = (value) => typeof value === 'function'

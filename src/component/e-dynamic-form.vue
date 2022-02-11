@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import {deepCopy} from '../utils/index.js'
+import {deepCopy, isFn} from '../utils/index.js'
 export default {
   props: {
     item: Object,
@@ -60,7 +60,7 @@ export default {
     },
     dynamic () {
       const dynamic = this.item.dynamic
-      if (typeof dynamic === 'function') {
+      if (isFn(dynamic)) {
         return dynamic()
       } else if (dynamic === undefined) {
         return true

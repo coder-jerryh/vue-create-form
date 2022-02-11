@@ -5,8 +5,10 @@
     :placeholder="parent.getPlaceholder(item)"
     :disabled="parent.getBoolean(item.disabled)"
     :multiple='item.multiple'
+    :allow-create='item.allowCreate'
+    :collapse-tags='item.collapseTags'
     @change="item.onChange && item.onChange($event, value)"
-    collapse-tags
+    default-first-option
     filterable
     clearable>
     <el-option

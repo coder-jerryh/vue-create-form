@@ -56,10 +56,8 @@ import eCascader from './e-cascader.vue'
 /** @手机号phone **/
 /** @身份证号idNumber **/
 /** @邮箱email **/
-import { defineValidator } from '../utils/index'
+import { defineValidator, isFn } from '../utils/index'
 
-// 是不是方法
-const isFn = (value) => typeof value === 'function'
 // placeholder前缀
 const PlaceholderPrefixs = {
   upload: '请上传',
@@ -376,7 +374,6 @@ export default {
         top: 50%;
         transform: translateY(-50%);
         transition: all ease .25s;
-        margin-left: 4px;
         left: 0;
         right: 0;
         text-align: right;
