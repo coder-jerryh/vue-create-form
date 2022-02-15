@@ -1,11 +1,11 @@
 {
-  "name": "vue-create-form",
+  "name": "ele-form",
   "description": "Vue动态生成Element Form",
-  "version": "0.4.2",
+  "version": "0.0.1",
   "author": "jerry_h@qq.com <jerry_h@qq.com>",
   "license": "MIT",
   "private": false,
-  "main": "./dist/vue-create-form.js",
+  "main": "./dist/ele-form.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"

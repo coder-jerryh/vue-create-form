@@ -27,7 +27,7 @@
         <component v-else v-model="form" :is='components[item.type]' :itemKey='itemKey' :item='item'>
           <!-- 动态表单 -->
           <template slot-scope='{dynamicI}'>
-            <vue-create-form
+            <ele-form
               ref='dynamicForm'
               v-model="form[itemKey][dynamicI]"
               :formData="item.formData"
@@ -73,7 +73,7 @@ const PlaceholderPrefixs = {
   dynamicForm: '请完善'
 }
 export default {
-  name: 'vue-create-form',
+  name: 'ele-form',
   provide () {
     return {
       parent: this
@@ -184,7 +184,7 @@ export default {
             rules.push({ required, validator })
           } else {
             // 不存在该规则
-            console.warn('vue-create-form:', `不支持rule为“${rule}”类型的校验规则`)
+            console.warn('ele-form:', `不支持rule为“${rule}”类型的校验规则`)
           }
         }
         // 自定义校验规则
@@ -244,7 +244,7 @@ export default {
             }
           }
         } else {
-          console.warn('vue-create-form:', `未声明“${item.label}”的option值`)
+          console.warn('ele-form:', `未声明“${item.label}”的option值`)
         }
         return newOption
       }

@@ -4,7 +4,7 @@
 2、【修复】label必需和非必需时抖动的问题
 
 ## 0.2.1 - 2021-09-29
-1、【优化】优化vue-create-form向子组件传递方法的方式，由props改为provide和inject注入
+1、【优化】优化ele-form向子组件传递方法的方式，由props改为provide和inject注入
 2、【修复】修复date-picker组件宽度问题
 
 ## 0.2.0 - 2021-09-28

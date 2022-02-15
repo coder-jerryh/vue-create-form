@@ -8,8 +8,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'vue-create-form.js',
-    library: 'vue-create-form', // 指定的就是你使用require时的模块名
+    filename: 'ele-form.js',
+    library: 'ele-form', // 指定的就是你使用require时的模块名
     libraryTarget: 'umd', // 指定输出格式
     umdNamedDefine: true // 会对UMD的构建过程中的AMD模块进行命名，否则就使用匿名的define
   },

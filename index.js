@@ -1,4 +1,4 @@
-import Main from './src/component/vue-create-form'
+import Main from './src/component/ele-form'
 import _Vue from 'vue'
 
 Main.install = Vue => {

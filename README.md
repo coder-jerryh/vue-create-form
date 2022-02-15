@@ -1,4 +1,4 @@
-# vue-create-form
+# ele-form
 
 # 超精简代码动态创建Element UI Form表单
 ## 代码效果图
@@ -9,12 +9,12 @@
 
 ### 1. npm安装
 ``` bash
-npm install vue-create-form
+npm install ele-form
 ```
 
 ### 2.yarn安装
 ``` bash
-yarn add vue-create-form
+yarn add ele-form
 ```
 
 ## 二、引入方法：
@@ -22,7 +22,7 @@ yarn add vue-create-form
 ### 1. 全局引入
 ``` bash
 // main.js中
-import VueCreateForm from 'vue-create-form'
+import VueCreateForm from 'ele-form'
 Vue.use(VueCreateForm)
 ```
 
@@ -30,7 +30,7 @@ Vue.use(VueCreateForm)
 
 ``` bash
 <script>
-  import vueCreateForm from 'vue-create-form'
+  import vueCreateForm from 'ele-form'
   export default {
     components: {
       vueCreateForm
@@ -43,7 +43,7 @@ Vue.use(VueCreateForm)
 ``` bash
 <template>
   <div>
-    <vue-create-form ref='form' v-model='form' :formData="formData"/>
+    <ele-form ref='form' v-model='form' :formData="formData"/>
     <div>
       <el-button type='primary' @click='submit'>提交</el-button>
     </div>
@@ -52,7 +52,7 @@ Vue.use(VueCreateForm)
 
 <script>
 // 若全局引入，此处不需要再引入
-import vueCreateForm from 'vue-create-form'
+import vueCreateForm from 'ele-form'
 export default {
   components: {
     // 若全局引入，此处不需要再引入
@@ -177,7 +177,7 @@ option: () => this.option
 
 ⚠️注意：type为checkbox时，组件v-model绑定的对象中，需声明默认值为[]，即：
 ```
-<vue-create-form :formData='formData' v-model='form' .../>
+<ele-form :formData='formData' v-model='form' .../>
 
 ...
 data () {
@@ -236,7 +236,7 @@ data () {
 |:------:| :------: | :------: | :------: | :------: | :------: |
 | required | 是否必填 | boolean | true/false | 默认都为必填true | false |
 | validator | 自定义验证规则 | array/function | - | - | 同element UI，示例见完整示例 |
-| rule | type为输入框类型时，使用vue-create-form自带的校验规则 | string | phone/idNumber/email/link | - | - |
+| rule | type为输入框类型时，使用ele-form自带的校验规则 | string | phone/idNumber/email/link | - | - |
 
 ### 表单项事件
 ```
@@ -276,7 +276,7 @@ name: {
 <template>
   <div>
     <el-button type='warning' @click="changeOption">点击改变优惠券类型couponTypes</el-button>
-    <vue-create-form
+    <ele-form
       ref='vueCreateForm'
       v-model='form'
       labelWidth='100px'
@@ -287,7 +287,7 @@ name: {
 
 <script>
 // 若全局引入，此处不需要再引入
-import vueCreateForm from 'vue-create-form'
+import vueCreateForm from 'ele-form'
 export default {
   components: {
     // 若全局引入，此处不需要再引入

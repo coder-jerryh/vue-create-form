@@ -1,11 +1,11 @@
 <template>
   <section>
     <!-- {{form}} -->
-    <vue-create-form ref='eForm' v-model='form' :formData="formData">
+    <ele-form ref='eForm' v-model='form' :formData="formData">
       <p slot="detail">
         我叫{{form.name}}，性别{{sexOption[form.sex]}}，{{currentEducation}}学历，{{form.isInSchool ? '在读' : '已毕业'}}，今年{{form.age}}岁，每月工资{{form.salary}}元，手机号：{{form.phone}}<br/>{{form.introduce}}
       </p>
-    </vue-create-form>
+    </ele-form>
     <div class="btns">
       <el-button icon="el-icon-refresh-left" @click="reset">重置</el-button>
       <el-button type="primary" icon='el-icon-check' @click="submit">提交</el-button>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import vueCreateForm from './component/vue-create-form.vue'
+import vueCreateForm from './component/ele-form.vue'
 export default {
   components:{
     vueCreateForm
