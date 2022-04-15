@@ -24,7 +24,7 @@
         <!-- ---------- 插槽 ---------- -->
         <slot v-if="item.type == 'slot'" :name='itemKey'/>
         <!-- 组件 -->
-        <component v-else v-model="form" :is='components[item.type]' :itemKey='itemKey' :item='item'>
+        <component v-else v-model="form" :is='components[item.type]' :itemKey='itemKey' :item='item' :disabled='disabled'>
           <!-- 动态表单 -->
           <template slot-scope='{dynamicI}'>
             <ele-form
@@ -32,7 +32,7 @@
               v-model="form[itemKey][dynamicI]"
               :formData="item.formData"
               :labelWidth='item.labelWidth'
-              :disabled='item.disabled'
+              :disabled='item.disabled || disabled'
             />
           </template>
         </component>
@@ -239,7 +239,7 @@ export default {
             for (const key in option) {
               newOption.push({
                 label: option[key],
-                value: isNaN(Number(key)) ? key : Number(key)
+                value: this.turnDataType(key)
               })
             }
           }
@@ -303,6 +303,10 @@ export default {
       })
       return validFlag
     },
+    // 验证单个字段
+    validateField (field, cb) {
+      this.eForm.validateField(field, cb)
+    },
     // 重置表单
     resetFields () {
       this.eForm.resetFields()
@@ -334,6 +338,24 @@ export default {
         }
       }
       this.$emit('input', form)
+    },
+    turnDataType (value) {
+      if (value.length > 10) {
+        /** @字符串长度大于10不允许转数字 **/
+        return value
+      } else if (isNaN(Number(value))) {
+        /** @不可转换成数字 **/
+        return value
+      } else if (value === 'true') {
+        /** @布尔值true **/
+        return true
+      } else if (value === 'false') {
+        /** @布尔值false **/
+        return false
+      } else {
+        /** @可转换成数字 **/
+        return Number(value)
+      }
     }
   }
 }

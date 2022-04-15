@@ -2,14 +2,14 @@
   <!-- ---------- 输入框 ---------- -->
   <el-input
     :type='item.type'
-    v-model="value[itemKey]"
+    v-model="inputValue"
     :placeholder="parent.getPlaceholder(item)"
     :disabled="parent.getBoolean(item.disabled)"
     :maxlength="item.maxlength || 9999"
     :min='item.min'
     :rows='item.rows || 4'
     :autosize="{ minRows: item.rows || 4, maxRows: 20 }"
-    @input="item.onInput && item.onInput(value)"
+    @input="input"
     @blur="item.onBlur && item.onBlur(value)"
     @change="item.onChange && item.onChange(value)"
     clearable>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import {debounce} from '../utils/index'
 export default {
   props: {
     item: Object,
@@ -35,10 +36,28 @@ export default {
   },
   data () {
     return {
+      inputValue: ''
     }
   },
-  created () {},
-  methods: {}
+  computed: {
+    formValue () {
+      return this.value[this.itemKey]
+    }
+  },
+  watch: {
+    value: {
+      handler () {
+        this.inputValue = this.formValue
+      },
+      immediate: true
+    }
+  },
+  methods: {
+    input: debounce(function () {
+      this.value[this.itemKey] = this.inputValue
+      this.item.onInput && this.item.onInput(this.value)
+    }, 300)
+  }
 }
 </script>
 

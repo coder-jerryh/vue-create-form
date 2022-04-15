@@ -22,18 +22,18 @@ yarn add ele-form
 ### 1. 全局引入
 ``` bash
 // main.js中
-import VueCreateForm from 'ele-form'
-Vue.use(VueCreateForm)
+import eleForm from 'ele-form'
+Vue.use(eleForm)
 ```
 
 ### 2. 组件内部引入
 
 ``` bash
 <script>
-  import vueCreateForm from 'ele-form'
+  import eleForm from 'ele-form'
   export default {
     components: {
-      vueCreateForm
+      eleForm
     }
   }
 </script>
@@ -52,11 +52,11 @@ Vue.use(VueCreateForm)
 
 <script>
 // 若全局引入，此处不需要再引入
-import vueCreateForm from 'ele-form'
+import eleForm from 'ele-form'
 export default {
   components: {
     // 若全局引入，此处不需要再引入
-    vueCreateForm
+    eleForm
   },
   data () {
     return {
@@ -84,7 +84,7 @@ export default {
 </style>
 ```
 
-## 四、VueCreateForm Attributes
+## 四、eleForm Attributes
 | 参数 | 说明 | 类型 | 可选值	| 默认值 | 举例 |
 |:------:| :------: | :------: | :------: | :------: | :------: |
 | formData | 表单数据项 | object | - | - | 见下方 |
@@ -253,7 +253,7 @@ name: {
 }
 ```
 
-## 六、VueCreateForm Events
+## 六、eleForm Events
 | 事件名 | 说明 | 举例 |
 |:------: | :------: | :------: |
 | validate | 提交验证 | this.$refs.form.validate(() => { // todo }) |
@@ -277,7 +277,7 @@ name: {
   <div>
     <el-button type='warning' @click="changeOption">点击改变优惠券类型couponTypes</el-button>
     <ele-form
-      ref='vueCreateForm'
+      ref='eleForm'
       v-model='form'
       labelWidth='100px'
       :formData="formData"/>
@@ -287,11 +287,11 @@ name: {
 
 <script>
 // 若全局引入，此处不需要再引入
-import vueCreateForm from 'ele-form'
+import eleForm from 'ele-form'
 export default {
   components: {
     // 若全局引入，此处不需要再引入
-    vueCreateForm
+    eleForm
   },
   data () {
     // (1) 自定义表单验证
@@ -404,12 +404,12 @@ export default {
     },
     // (7) 清空表单
     clear () {
-      this.$refs.vueCreateForm.resetFields()
+      this.$refs.eleForm.resetFields()
     },
     // (8) 提交表单
     submit () {
       // 表单验证
-      this.$refs.vueCreateForm.validate(() => {
+      this.$refs.eleForm.validate(() => {
         // todo...
       })
     }
@@ -421,5 +421,5 @@ export default {
 </style>
 ```
 
-作者VX：Nice2cu_Hu，目前Vue-create-form已投入实际生产中，极大的减少前端工程师开发后台管理系统表单的工作量\
+作者VX：Nice2cu_Hu，目前ele-form已投入实际生产中，极大的减少前端工程师开发后台管理系统表单的工作量\
 稳定且可靠，作者长期维护中…

@@ -88,3 +88,15 @@ export const deepCopy = (obj) => {
 
 // 是不是function
 export const isFn = (value) => typeof value === 'function'
+
+export const debounce = (cb, delay) => {
+  let timer = null
+  return function () {
+    timer && clearTimeout(timer)
+    timer = setTimeout(() => {
+      cb.apply(this, arguments)
+      clearTimeout(timer)
+      timer = null
+    }, delay)
+  }
+}

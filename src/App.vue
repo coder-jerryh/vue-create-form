@@ -1,6 +1,6 @@
 <template>
   <section>
-    <!-- {{form}} -->
+    {{form}}
     <ele-form ref='eForm' v-model='form' :formData="formData">
       <p slot="detail">
         我叫{{form.name}}，性别{{sexOption[form.sex]}}，{{currentEducation}}学历，{{form.isInSchool ? '在读' : '已毕业'}}，今年{{form.age}}岁，每月工资{{form.salary}}元，手机号：{{form.phone}}<br/>{{form.introduce}}
@@ -14,15 +14,15 @@
 </template>
 
 <script>
-import vueCreateForm from './component/ele-form.vue'
+import eleForm from './component/ele-form.vue'
 export default {
   components:{
-    vueCreateForm
+    eleForm
   },
   data () {
     return {
       form: {
-        name: '',
+        name: 'Jerry',
         hobby: [1, 2],
         age: '',
         job: '',
@@ -52,7 +52,7 @@ export default {
           maxlength: 10,
           span: 24,
           prompt: {
-            title: '标题',
+            label: '标题',
             content: '<a>请输入真实姓名</a>'
           }
         },
@@ -99,26 +99,7 @@ export default {
             schoolName: {
               type: 'input',
               label: '任课老师',
-            },
-            educationList: {
-              type: 'dynamicForm',
-              span: 24,
-              itemSpan: 24,
-              labelWidth: 'auto',
-              required: false,
-              formData: {
-                schoolName: {
-                  span: 12,
-                  type: 'date',
-                  label: '上课时间',
-                },
-                address: {
-                  span: 12,
-                  type: 'input',
-                  label: '上课地点',
-                }
-              }
-            },
+            }
           }
         },
         /** @switch **/
@@ -199,7 +180,7 @@ export default {
         },
         divider: {
           type: 'divider',
-          title: '联系方式'
+          label: '联系方式'
         },
         /** @输入框 **/
         phone: {
@@ -274,7 +255,7 @@ export default {
 }
 </script>
 
-<style lang='less' scoped>
+<style lang='scss' scoped>
   section {
     border: 1px solid #e9ebf0;
     width: 820px;

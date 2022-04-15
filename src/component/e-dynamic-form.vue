@@ -2,7 +2,7 @@
   <!-- 动态表单 -->
   <section class="dynamicForm">
     <el-button
-      v-if="dynamic"
+      v-if="!disabled && dynamic"
       class="add"
       :style="{'--label-length': labelLen}"
       :prevent='false'
@@ -15,7 +15,7 @@
       <li :class="`el-col-${item.itemSpan || 24}`" v-for="(dynamicItem, dynamicI) in list" :key="dynamicI">
         <slot :dynamicI='dynamicI'/>
         <el-button
-          v-if="dynamic"
+          v-if="!disabled && dynamic"
           class="del"
           plain
           :prevent='false'
@@ -44,7 +44,8 @@ export default {
       onRemove: 监听移除
     **/
     itemKey: String,
-    value: Object
+    value: Object,
+    disabled: Boolean
   },
   computed: {
     list () {

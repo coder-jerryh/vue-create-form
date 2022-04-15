@@ -7,14 +7,14 @@
     :multiple='item.multiple'
     :allow-create='item.allowCreate'
     :collapse-tags='item.collapseTags'
-    @change="item.onChange && item.onChange($event, value)"
+    @change="change"
     default-first-option
     filterable
     clearable>
     <el-option
       v-for="(opt, i) in parent.getOption(item)"
       :key="i"
-      :value="String(opt.value)"
+      :value="opt.value"
       :label="opt.label"
       :disabled='opt.disabled'/>
   </el-select>
@@ -33,11 +33,11 @@ export default {
       default: null
     }
   },
-  data () {
-    return {
+  methods: {
+    change (e) {
+      this.item.onChange && this.item.onChange(e, this.value)
     }
-  },
-  methods: {}
+  }
 }
 </script>
 
